@@ -25,7 +25,7 @@ jobs:
       - name: Set up Bazel
         uses: bazel-contrib/setup-bazel@0.18.0
         with:
-          bazelisk-version: 'latest'
+          bazelisk-version: '1.28.1'
           # Avoid downloading Bazel every time.
           bazelisk-cache: true
           # Store build cache per workflow.
