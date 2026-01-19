@@ -1,0 +1,32 @@
+---
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+# Cancels this run if a new one referring to the same object and same workflow
+# is requested
+concurrency:
+  group: >
+    ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code from GitHub
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+      - name: Set up Bazel
+        uses: bazelbuild/setup-bazel@v5
+        with:
+          bazel-version: '8.5.1'
+      - name: Build the project
+        run: bazel build //...
+      - name: Run tests
+        run: bazel test //...
