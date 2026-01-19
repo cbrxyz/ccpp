@@ -1,0 +1,6 @@
+# Use C++20
+--cxxopt='-std=c++20'
+--cxxopt='-Werror'
+
+# Enable bzlmod
+common --enable_bzlmod

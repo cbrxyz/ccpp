@@ -1,0 +1,18 @@
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
+load("@rules_cc//cc:cc_test.bzl", "cc_test")
+
+cc_library(
+    name = "URL",
+    hdrs = ["URL.h"],
+    visibility = ["//visibility:public"],
+)
+
+cc_test(
+    name = "URL_test",
+    srcs = ["URL_test.cpp"],
+    deps = [
+        ":URL",
+        "@catch2//:catch2_main"
+    ],
+)
